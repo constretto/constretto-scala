@@ -1,19 +1,19 @@
 h1. Constretto Scala API
 
 Constretto Scala API is a native Scala wrapper API over the "Constretto":https://github.com/constretto/constretto-core/ configuration management framework for Java applications. 
-By using this API you will be able to get a api that feels natural for Scala developers without loosing any of the features of Constretto.
+By using this API you will be able to get a API that feels natural for Scala developers without loosing any of the features of Constretto.
 
 
 h2. How to Install?
 
-Constretto is deployed to a maven repository, so if you are using maven, you can simply add constretto-scala as dependencies in your pom:
+Constretto is deployed to a Maven repository, so if you are using Maven, you can simply add constretto-scala as dependencies in your pom:
 
 <pre>
 	<dependencies>
 		...
 		<dependency>
 			<groupId>org.constretto</groupId>
-			<artifactId>constretto-scala</artifactId>
+			<artifactId>constretto-scala_2.8.1</artifactId>
 			<version>1.0-SNAPSHOT</version>
 		</dependency>
 		...
@@ -23,7 +23,7 @@ Constretto is deployed to a maven repository, so if you are using maven, you can
 	    <repository>
 	      <id>constretto.org</id>
 	      <name>Constretto public maven repository</name>
-	      <url>http://repo.constretto.org/content/repositories/releases</url>
+	      <url>http://repo.constretto.org/content/repositories/snapshots</url>
 	    </repository>
 	</repositories>		
 </pre>
@@ -40,7 +40,7 @@ h2. How to use?
 
 
 
-Constretto-Scala provides a simple API to configure and retreive values from Constretto. 
+Constretto-Scala provides a simple API to configure and retrieve values from Constretto. 
 
 <pre>
 	import org.constretto._
@@ -48,29 +48,29 @@ Constretto-Scala provides a simple API to configure and retreive values from Con
 	
 	val constretto = Constretto(List(properties("classpath:test.properties")),"myTag","myOtherTag")
 	
-	val aKeyThatMightExists:Option[String] = constretto.get[String]("myKey") 
+	val aKeyThatMightExist:Option[String] = constretto.get[String]("myKey") 
 	val aKeyThatMustExist:String = constretto[String]("myKey")  // throws exception on missing key	
 </pre>
 
 Constretto-Scala defines a ScalaValueConverter type class for converting values to specific types.
-It comes bundled with predifined instances for all ValueConverter types defined by Constretto.
+It comes bundled with predefined instances for all ValueConverter types defined by Constretto.
 
 <pre>
-	val existsInt:Option[Int] = constretto.get[Int]("int") // uses the intConverter instance to convert a string to an int
-	val unknownType:Option[Bar] = constretto.get[Bar]("bar") // gives compile error since no ScalaValueConverter is defined for type Bar
+	val existsInt:Option[Int] = constretto.get[Int]("someIntKey") // uses the intConverter instance to convert a string to an int
+	val unknownType:Option[Bar] = constretto.get[Bar]("someBarKey") // gives compile error since no ScalaValueConverter is defined for type Bar
 </pre>
 
 You can easily define your own ScalaConverter instances
 
 <pre>
-	object Foo {
-	  implicit def fooConverter(implicit intC:ScalaValueConverter[Int]) = ScalaValueConverter[Foo](_.split(":") match {
-	    case Array(first, second) => Foo(first, intC.convert(second))
+	object Bar {
+	  implicit def barConverter(implicit intC:ScalaValueConverter[Int]) = ScalaValueConverter[Bar](_.split(":") match {
+	    case Array(first, second) => Bar(first, intC.convert(second))
 	  })
 	}
-	case class Foo(a:String, b:Int)
+	case class Bar(a:String, b:Int)
 	
-	val foo:Option[Foo] = constretto.get[Foo]("foo") // compiles just fine and uses the fooConverter to convert strings to Foos	
+	val bar:Option[Bar] = constretto.get[Bar]("someBarKey") // compiles just fine and uses the barConverter to convert strings to Foos	
 </pre>
 
 
