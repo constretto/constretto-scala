@@ -21,22 +21,13 @@ object Demo {
 
     val doesNotExist:Option[Int] = constretto.get[Int]("nah")
 
-//    val unknownType:Option[Float] = constretto.get[Float]("urk")
-
     println(existsString)
     println(existsInt)
     println(existsDouble)
     println(doesNotExist)
-//    println(unknownType)
-
 
     val foo:Option[Foo] = constretto.get[Foo]("foo")
 
     println(foo)
-
-//    val foo1 = constretto[Foo]("lkasf")
-
-//    println(foo1)
-
   }
 }
