@@ -4,29 +4,30 @@ import org.constretto._
 import Constretto._
 
 object Foo {
-  implicit def fooConverter(implicit intC:ScalaValueConverter[Int]) = ScalaValueConverter[Foo](_.split(":") match {
-    case Array(first, second) => Foo(first, intC.convert(second))
+  implicit def fooConverter(implicit intConverter: ScalaValueConverter[Int]) = ScalaValueConverter[Foo](_.split(":") match {
+    case Array(first, second) => Foo(first, intConverter.convert(second))
   })
 }
-case class Foo(a:String, b:Int)
+
+case class Foo(a: String, b: Int)
 
 object Demo {
-  def main(args:Array[String]){
+  def main(args: Array[String]) {
 
     val constretto = Constretto(List(properties("classpath:test.properties")))
 
-    val existsString:Option[String] = constretto.get[String]("string")
-    val existsInt:Option[Int] = constretto.get[Int]("int")
-    val existsDouble:Option[Double] = constretto.get[Double]("double")
+    val existsString: Option[String] = constretto.get[String]("string")
+    val existsInt: Option[Int] = constretto.get[Int]("int")
+    val existsDouble: Option[Double] = constretto.get[Double]("double")
 
-    val doesNotExist:Option[Int] = constretto.get[Int]("nah")
+    val doesNotExist: Option[Int] = constretto.get[Int]("nah")
 
     println(existsString)
     println(existsInt)
     println(existsDouble)
     println(doesNotExist)
 
-    val foo:Option[Foo] = constretto.get[Foo]("foo")
+    val foo: Option[Foo] = constretto.get[Foo]("foo")
 
     println(foo)
   }

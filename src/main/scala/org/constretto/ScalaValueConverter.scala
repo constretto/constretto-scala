@@ -4,11 +4,11 @@ import internal.converter._
 
 object ScalaValueConverter {
 
-  def apply[T](f:String => T):ScalaValueConverter[T] = new ScalaValueConverter[T]{
+  def apply[T](f: String => T): ScalaValueConverter[T] = new ScalaValueConverter[T] {
     def convert(value: String) = f(value)
   }
 
-  def fromConstretto[A, B](v:ValueConverter[A], f:A => B = identity[A] _):ScalaValueConverter[B] = new ScalaValueConverter[B]{
+  def fromConstretto[A, B](v: ValueConverter[A], f: A => B = identity[A] _): ScalaValueConverter[B] = new ScalaValueConverter[B] {
     def convert(value: String) = f(v.fromString(value))
   }
 
@@ -27,5 +27,5 @@ object ScalaValueConverter {
 }
 
 trait ScalaValueConverter[T] {
-  def convert(value:String):T
+  def convert(value: String): T
 }
