@@ -16,7 +16,6 @@
 package org.constretto
 
 import exception.ConstrettoExpressionException
-import internal.provider.ConfigurationProvider
 import internal.store.{IniFileConfigurationStore, PropertiesStore}
 import model.Resource
 
@@ -29,8 +28,8 @@ object Constretto {
   }
 
   def apply(stores: Seq[ConfigurationStore], tags: String*): Constretto = {
-    val withResources = stores.foldLeft(new ConfigurationProvider)(_.addConfigurationStore(_))
-    val withTags = tags.foldLeft(withResources)(_.addTag(_))
+    val withResources = stores.foldLeft(new ConstrettoBuilder)(_.addConfigurationStore(_))
+    val withTags = tags.foldLeft(withResources)(_.addCurrentTag(_))
     Constretto.configuration(withResources.getConfiguration)
   }
 
