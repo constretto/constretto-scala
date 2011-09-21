@@ -1,0 +1,1 @@
+cp ./project/lib/* ./project/boot/scala-2.8.1/org.scala-tools.sbt/sbt/0.10.1/extra

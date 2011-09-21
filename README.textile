@@ -6,14 +6,16 @@ By using this API you will be able to get a API that feels natural for Scala dev
 
 h2. How to Install?
 
-Constretto is deployed to a Maven repository, so if you are using Maven, you can simply add constretto-scala as dependencies in your pom:
+Constretto is cross compiled for scala versions 2.8.0, 2.8.1, 2.9.0 and 2.9.1 and deployed to
+the sonatype snapshot repository. So if you are using Maven, you can simply add constretto-scala as dependencies in your pom:
+
 
 <pre>
 	<dependencies>
 		...
 		<dependency>
 			<groupId>org.constretto</groupId>
-			<artifactId>constretto-scala_2.8.1</artifactId>
+			<artifactId>constretto-scala_2.9.1</artifactId>
 			<version>1.0-SNAPSHOT</version>
 		</dependency>
 		...
@@ -23,7 +25,7 @@ Constretto is deployed to a Maven repository, so if you are using Maven, you can
 	    <repository>
 	      <id>constretto.org</id>
 	      <name>Constretto public maven repository</name>
-	      <url>http://repo.constretto.org/content/repositories/snapshots</url>
+	      <url>https://oss.sonatype.org/content/repositories/snapshots</url>
 	    </repository>
 	</repositories>		
 </pre>
@@ -31,7 +33,7 @@ Constretto is deployed to a Maven repository, so if you are using Maven, you can
 If you are using SBT:
 
 <pre>
-	val constrettoRepo = "constretto repository" at "http://repo.constretto.org/content/repositories/snapshots"
+	val constrettoRepo = "Sonatype Nexus Snapshots" at "https://oss.sonatype.org/content/repositories/snapshots"
 	val constretto = "org.constretto" %% "constretto-scala" % "1.0-SNAPSHOT" 
 </pre>
 
