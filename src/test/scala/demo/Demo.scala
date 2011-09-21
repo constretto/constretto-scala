@@ -36,7 +36,7 @@ object Demo {
 
     val existsString: Option[String] = constretto.get[String]("string")
     val existsInt: Option[Int] = constretto.get[Int]("int")
-    val existsDouble: Option[Double] = constretto.get[Double]("double")
+    val existsDouble: Option[Double] = constretto[Double]("double")
 
     val doesNotExist: Option[Int] = constretto.get[Int]("nah")
 
