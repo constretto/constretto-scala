@@ -46,14 +46,14 @@ trait Constretto {
 
   def get[T](name: String)(implicit converter: ScalaValueConverter[T]): Option[T] = {
     try {
-      Some(converter.convert(config.evaluateToString(name)))
+      Some(converter.convert(ScalaValueConverter.gson.parse(config.evaluateToString(name))))
     } catch {
       case _: ConstrettoExpressionException => None
     }
   }
 
   def apply[T](name: String)(implicit converter: ScalaValueConverter[T]): T =
-    converter.convert(config.evaluateToString(name))
+    converter.convert(ScalaValueConverter.gson.parse(config.evaluateToString(name)))
 }
 
 
