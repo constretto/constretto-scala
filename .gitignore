@@ -4,6 +4,7 @@
 *.iws
 .history
 project/boot
+project/project
 lib_managed
 project/build/target
 target
