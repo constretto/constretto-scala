@@ -2,7 +2,14 @@
 *.iml
 *.ipr
 *.iws
+.history
 project/boot
 lib_managed
 project/build/target
 target
+.cache
+.classpath
+.project
+.target
+.scala_dependencies
+.settings
