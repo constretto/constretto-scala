@@ -21,7 +21,7 @@ object Settings {
     organization := "org.constretto",
     version := BuildSettings.version,
     scalaVersion := "2.9.1",
-    crossScalaVersions := Seq("2.8.0", "2.8.1", "2.9.0", "2.9.0-1"),
+    crossScalaVersions := Seq("2.8.0", "2.8.1", "2.9.0"),
     credentialsSetting,
     shellPrompt := ShellPrompt.buildShellPrompt,
     publishTo <<= (version) {
