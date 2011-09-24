@@ -1,6 +1,7 @@
 package demo
 
 import org.constretto.Converter
+import java.net.URL
 
 object Foo {
   implicit def fooConverter = Converter.fromString[Foo] {
@@ -28,5 +29,14 @@ object Person {
   implicit val personConverter = Converter.fromObject {
     o =>
       Person(o[String]("name"), o[Int]("age"), o[Address]("address"))
+  }
+}
+
+case class Service(name: String, url: URL)
+
+object Service {
+  implicit val serviceConverter = Converter.fromObject {
+    o =>
+      Service(o[String]("name"), o[URL]("url"))
   }
 }

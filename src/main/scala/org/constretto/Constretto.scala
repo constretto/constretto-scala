@@ -30,7 +30,7 @@ object Constretto {
   def apply(stores: Seq[ConfigurationStore], tags: String*): Constretto = {
     val withResources = stores.foldLeft(new ConstrettoBuilder)(_.addConfigurationStore(_))
     val withTags = tags.foldLeft(withResources)(_.addCurrentTag(_))
-    Constretto.configuration(withResources.getConfiguration)
+    Constretto.configuration(withTags.getConfiguration)
   }
 
   def properties(props: String*): ConfigurationStore = props.map(new Resource(_)).foldLeft(new PropertiesStore)(_.addResource(_))
