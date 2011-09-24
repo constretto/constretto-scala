@@ -44,16 +44,16 @@ object Constretto {
 trait Constretto {
   protected def config: ConstrettoConfiguration
 
-  def get[T](name: String)(implicit converter: ScalaValueConverter[T]): Option[T] = {
+  def get[T](name: String)(implicit converter: Converter[T]): Option[T] = {
     try {
-      Some(converter.convert(ScalaValueConverter.gson.parse(config.evaluateToString(name))))
+      Some(converter.convert(GsonParser.parse(config.evaluateToString(name))))
     } catch {
       case _: ConstrettoExpressionException => None
     }
   }
 
-  def apply[T](name: String)(implicit converter: ScalaValueConverter[T]): T =
-    converter.convert(ScalaValueConverter.gson.parse(config.evaluateToString(name)))
+  def apply[T](name: String)(implicit converter: Converter[T]): T =
+    converter.convert(GsonParser.parse(config.evaluateToString(name)))
 }
 
 

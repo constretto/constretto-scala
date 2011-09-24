@@ -62,7 +62,7 @@ object ShellPrompt {
 }
 
 object Dependencies {
-  val constrettoVersion = "2.0-beta-5"
+  val constrettoVersion = "2.0-beta-4"
 
   val constretto = "org.constretto" % "constretto-core" % constrettoVersion
   val deps = Seq(constretto)

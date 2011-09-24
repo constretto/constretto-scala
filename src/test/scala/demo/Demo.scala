@@ -15,21 +15,16 @@
  */
 package demo
 
-import org.constretto._
-import Constretto._
-import java.lang.reflect.Type
-import com.google.gson._
+import org.constretto._, Constretto._
 
 /**
  * @author jteigen
  */
 object Foo {
-  implicit def fooConverter(implicit intConverter: ScalaValueConverter[Int], string:ScalaValueConverter[String]) = ScalaValueConverter[Foo]{ json =>
-    def parse(s:String) = (s.split(":") match {
-      case Array(first, second) => Foo(first, intConverter.convert(ScalaValueConverter.JPrimitive(second)))
-    })
-    def fromMap(map:Map[String, ScalaValueConverter.Json]) = Foo(string.convert(map("a")), intConverter.convert(map("b")))
-    json.fold(a => sys.error("k"), fromMap, parse)
+  implicit def fooConverter(implicit intConverter: Converter[Int], string:Converter[String]) = Converter.fromString[Foo]{
+    _.split(":") match {
+      case Array(first, second) => Foo(first, intConverter.convert(JPrimitive(second)))
+    }
   }
 }
 
@@ -63,24 +58,20 @@ object Demo extends App {
 
   case class Address(postalCode: String, streetName:String)
   object Address {
-    implicit def addressConverter(implicit string:ScalaValueConverter[String]) = ScalaValueConverter{json =>
-      def douche(a:Any) = sys.error(a.toString)
-      def build(map:Map[String, ScalaValueConverter.Json]) = Address(string.convert(map("postalCode")), string.convert(map("streetName")))
-      json.fold(douche, build, douche)
+    implicit def addressConverter(implicit string:Converter[String]) = Converter.fromMap{map =>
+      Address(
+        string.convert(map("postalCode")),
+        string.convert(map("streetName")))
     }
   }
   case class Person(name:String, age:Int, address:Address)
   object Person{
-    implicit def personConverter(implicit string:ScalaValueConverter[String], int:ScalaValueConverter[Int], address:ScalaValueConverter[Address]) = ScalaValueConverter[Person]{ json =>
-      def douche(json:Any) = sys.error(json.toString)
-      def build(map:Map[String, ScalaValueConverter.Json]) =
+    implicit def personConverter(implicit string:Converter[String], int:Converter[Int], address:Converter[Address]) = Converter.fromMap{ map =>
         Person(
           string.convert(map("name")),
           int.convert(map("age")),
           address.convert(map("address")))
-      json.fold(douche, build, douche)
     }
-
   }
 
   val myPerson = constretto[Person]("myPerson")
