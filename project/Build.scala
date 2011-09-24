@@ -4,7 +4,7 @@ import com.rossabaker.sbt.signer.SignerPlugin
 import SignerPlugin.Keys._
 
 object BuildSettings {
-	val version = "1.0-SNAPSHOT"	
+	val version = "1.0-beta-1"	
 }
 
 object Settings {  
@@ -21,7 +21,7 @@ object Settings {
     organization := "org.constretto",
     version := BuildSettings.version,
     scalaVersion := "2.9.1",
-    crossScalaVersions := Seq("2.8.0", "2.8.1", "2.9.0"),
+    crossScalaVersions := Seq("2.9.0","2.9.1"),
     credentialsSetting,
     shellPrompt := ShellPrompt.buildShellPrompt,
     publishTo <<= (version) {
@@ -62,7 +62,7 @@ object ShellPrompt {
 }
 
 object Dependencies {
-  val constrettoVersion = "2.0-beta-4"
+  val constrettoVersion = "2.0-beta-5"
 
   val constretto = "org.constretto" % "constretto-core" % constrettoVersion
   val deps = Seq(constretto)

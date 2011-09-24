@@ -54,6 +54,9 @@ object Demo extends App {
   val myPersons = constretto[List[Person]]("myPersons")
   println(myPersons)
 
-  //val service = constretto[Service]("myService")
-  //println(service)
+  val service = constretto[Service]("myService")
+  println(service)
+
+  val services = constretto[List[Service]]("myServices")
+  println(services)
 }
