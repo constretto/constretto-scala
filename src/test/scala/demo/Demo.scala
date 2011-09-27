@@ -19,8 +19,8 @@ import org.constretto._, Constretto._
 
 /**
  * @author jteigen
+ * @author <a href="mailto:kaare.nilsen@gmail.com">Kaare Nilsen</a>
  */
-
 object Demo extends App {
   val constretto = Constretto(List(properties("classpath:test.properties")))
 

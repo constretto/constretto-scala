@@ -16,6 +16,7 @@
 package org.constretto
 
 import exception.ConstrettoExpressionException
+import internal.ScalaWrapperConstrettoConfiguration
 import internal.store.{IniFileConfigurationStore, PropertiesStore}
 import model.Resource
 
@@ -23,14 +24,14 @@ import model.Resource
  * @author jteigen
  */
 object Constretto {
-  def configuration(constrettoConfiguration: ConstrettoConfiguration): Constretto = new Constretto {
+  def configuration(constrettoConfiguration: ScalaWrapperConstrettoConfiguration): Constretto = new Constretto {
     def config = constrettoConfiguration
   }
 
   def apply(stores: Seq[ConfigurationStore], tags: String*): Constretto = {
     val withResources = stores.foldLeft(new ConstrettoBuilder)(_.addConfigurationStore(_))
     val withTags = tags.foldLeft(withResources)(_.addCurrentTag(_))
-    Constretto.configuration(withTags.getConfiguration(true))
+    Constretto.configuration(withTags.getConfigurationForScala)
   }
 
   def properties(props: String*): ConfigurationStore = props.map(new Resource(_)).foldLeft(new PropertiesStore)(_.addResource(_))
@@ -42,18 +43,18 @@ object Constretto {
 }
 
 trait Constretto {
-  protected def config: ConstrettoConfiguration
+  protected def config: ScalaWrapperConstrettoConfiguration
 
   def get[T](name: String)(implicit converter: Converter[T]): Option[T] = {
     try {
-      Some(converter.convert(GsonParser.parse(config.evaluateToString(name))))
+      Some(converter.convert(CValueParser.parse(config.get(name))))
     } catch {
       case _: ConstrettoExpressionException => None
     }
   }
 
   def apply[T](name: String)(implicit converter: Converter[T]): T =
-    converter.convert(GsonParser.parse(config.evaluateToString(name)))
+    converter.convert(CValueParser.parse(config.get(name)))
 }
 
 

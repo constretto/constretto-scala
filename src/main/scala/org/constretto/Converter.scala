@@ -19,6 +19,7 @@ import org.constretto.internal.converter._
 
 /**
  * @author jteigen
+ * @author <a href="mailto:kaare.nilsen@gmail.com">Kaare Nilsen</a>
  */
 object Converter {
 
@@ -26,21 +27,28 @@ object Converter {
     def convert(value: Json) = f(value)
   }
 
-  private case class not(expected:String) {
-    def list(l:List[Json]) = sys.error("Expected "+expected+", got " + l)
-    def map(o:JObject) = sys.error("Expected "+expected+", got " + o)
-    def string(s:String) = sys.error("Excpected " + expected+", got " + s)
+  private case class not(expected: String) {
+    def list(l: List[Json]) = sys.error("Expected " + expected + ", got " + l)
+
+    def map(o: JObject) = sys.error("Expected " + expected + ", got " + o)
+
+    def string(s: String) = sys.error("Excpected " + expected + ", got " + s)
   }
 
-  def fromString[T](f:String => T) = apply(_.fold(not("string").list, not("string").map, f))
-  def fromObject[T](f:JObject => T) = apply(_.fold(not("object").list, f, not("object").string))
-  def fromList[T](f:Json => T) = apply(_.fold(_.map(f), not("list").map, not("list").string))
+  def fromString[T](f: String => T) = apply(_.fold(not("string").list, not("string").map, f))
+
+  def fromObject[T](f: JObject => T) = apply(_.fold(not("object").list, f, not("object").string))
+
+  def fromList[T](f: Json => T) = apply(_.fold(_.map(f), not("list").map, not("list").string))
+
   def fromConstretto[A, B](v: ValueConverter[A], f: A => B = identity[A] _) = fromString(p => f(v.fromString(p)))
 
   implicit def listConverter[T](implicit cv: Converter[T]) = fromList(cv.convert)
 
-  implicit def mapConverter[K,V](implicit keyConv: Converter[K], valueConv: Converter[V]) = fromObject{
-    _.data.map{ case (k, v) => (keyConv.convert(JPrimitive(k)), valueConv.convert(v))}
+  implicit def mapConverter[K, V](implicit keyConv: Converter[K], valueConv: Converter[V]) = fromObject {
+    _.data.map {
+      case (k, v) => (keyConv.convert(JPrimitive(k)), valueConv.convert(v))
+    }
   }
 
   implicit val booleanConverter = fromConstretto[java.lang.Boolean, Boolean](new BooleanValueConverter, _.booleanValue)
