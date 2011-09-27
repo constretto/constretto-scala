@@ -4,7 +4,7 @@ import com.rossabaker.sbt.signer.SignerPlugin
 import SignerPlugin.Keys._
 
 object BuildSettings {
-	val version = "1.0-beta-2"
+	val version = "1.0-beta-3"
 }
 
 object Settings {  

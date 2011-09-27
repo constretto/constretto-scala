@@ -39,12 +39,12 @@ object Address {
   }
 }
 
-case class Person(name: String, age: Int, address: Address)
+case class Person(name: String, age: Int, occupation:Option[String], address: Address)
 
 object Person {
   implicit val personConverter = Converter.fromObject {
     o =>
-      Person(o[String]("name"), o[Int]("age"), o[Address]("address"))
+      Person(o[String]("name"), o[Int]("age"), o.get[String]("occupation"), o[Address]("address"))
   }
 }
 
