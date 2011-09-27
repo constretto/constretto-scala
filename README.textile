@@ -6,7 +6,7 @@ By using this API you will be able to get a API that feels natural for Scala dev
 
 h2. How to Install?
 
-Constretto is cross compiled for scala versions 2.8.0, 2.8.1, 2.9.0 and 2.9.1 and deployed to the sonatype snapshot repository.
+Constretto is cross compiled for scala versions 2.9.0 and 2.9.1 and deployed to the maven central repository.
 
 If you are using Maven, you can simply add constretto-scala as dependencies in your pom:
 
@@ -16,25 +16,16 @@ If you are using Maven, you can simply add constretto-scala as dependencies in y
 		<dependency>
 			<groupId>org.constretto</groupId>
 			<artifactId>constretto-scala_2.9.1</artifactId>
-			<version>1.0-SNAPSHOT</version>
+			<version>1.0-beta-2</version>
 		</dependency>
 		...
 	</dependencies>
-	
-	<repositories>
-	    <repository>
-	      <id>constretto.org</id>
-	      <name>Constretto public maven repository</name>
-	      <url>https://oss.sonatype.org/content/repositories/snapshots</url>
-	    </repository>
-	</repositories>		
-</pre>
+	</pre>
 
 If you are using SBT:
 
 <pre>
-	val constrettoRepo = "Sonatype Nexus Snapshots" at "https://oss.sonatype.org/content/repositories/snapshots"
-	val constretto = "org.constretto" %% "constretto-scala" % "1.0-SNAPSHOT" 
+	val constretto = "org.constretto" %% "constretto-scala" % "1.0-beta-2"
 </pre>
 
 
@@ -54,7 +45,7 @@ Constretto-Scala provides a simple API to configure and retrieve values from Con
 	val aKeyThatMustExist:String = constretto[String]("myKey")  // throws exception on missing key	
 </pre>
 
-Constretto-Scala defines a ScalaValueConverter type class for converting values to specific types.
+Constretto-Scala defines a Converter type class for converting values to specific types.
 It comes bundled with predefined instances for all ValueConverter types defined by Constretto.
 
 <pre>
@@ -62,17 +53,19 @@ It comes bundled with predefined instances for all ValueConverter types defined 
 	val unknownType:Option[Bar] = constretto.get[Bar]("someBarKey") // gives compile error since no ScalaValueConverter is defined for type Bar
 </pre>
 
-You can easily define your own ScalaConverter instances
+You can easily define your own Scala Converter instances
 
 <pre>
 	object Bar {
-	  implicit def barConverter(implicit intC:ScalaValueConverter[Int]) = ScalaValueConverter[Bar](_.split(":") match {
-	    case Array(first, second) => Bar(first, intC.convert(second))
-	  })
+	  implicit def barConverter = Converter.fromString[Bar] {
+        _.split(":") match {
+          case Array(first, second) => Bar(first, second.toInt)
+        }
+	  }
 	}
 	case class Bar(a:String, b:Int)
 	
-	val bar:Option[Bar] = constretto.get[Bar]("someBarKey") // compiles just fine and uses the barConverter to convert strings to Foos	
+	val bar:Option[Bar] = constretto.get[Bar]("someBarKey") // compiles just fine and uses the barConverter to convert strings to Bars
 </pre>
 
 
