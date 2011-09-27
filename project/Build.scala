@@ -4,11 +4,11 @@ import com.rossabaker.sbt.signer.SignerPlugin
 import SignerPlugin.Keys._
 
 object BuildSettings {
-	val version = "1.0-beta-3"
+  val version = "1.0-beta-3"
 }
 
-object Settings {  
-	
+object Settings {
+
   lazy val credentialsSetting = credentials ++=
     (Seq("SONATYPE_USER", "SONATYPE_PASSWORD").map(k => Option(System.getenv(k))) match {
       case Seq(Some(user), Some(pass)) =>
@@ -21,7 +21,7 @@ object Settings {
     organization := "org.constretto",
     version := BuildSettings.version,
     scalaVersion := "2.9.1",
-    crossScalaVersions := Seq("2.9.0","2.9.1"),
+    crossScalaVersions := Seq("2.9.0", "2.9.1"),
     credentialsSetting,
     shellPrompt := ShellPrompt.buildShellPrompt,
     publishTo <<= (version) {
@@ -31,30 +31,37 @@ object Settings {
         else
           Some("Sonatype Nexus Repository Manager" at "https://oss.sonatype.org/service/local/staging/deploy/maven2")
     },
-	signatureGenerator := Some(SignerPlugin.OpenPgpSignatureGenerator(
-      name = "sbt-pgp", 
-      password = System.getenv("SIGNER_PASSWORD")))
-    
+    signatureGenerator := Some(SignerPlugin.OpenPgpSignatureGenerator(
+      name = "sbt-pgp",
+      password = System.getenv("SIGNER_PASSWORD"))
+    ),
+    bouncyCastleLibraries in Global := Seq(
+      file("./project/lib/bcpg-jdk16-146.jar"),
+      file("./project/lib/bcprov-jdk16-146.jar")
+    )
   ) ++ SignerPlugin.signerSettings
 }
 
 object ShellPrompt {
+
   object devnull extends ProcessLogger {
-    def info (s: => String) {}
-    def error (s: => String) { }
-    def buffer[T] (f: => T): T = f
+    def info(s: => String) {}
+
+    def error(s: => String) {}
+
+    def buffer[T](f: => T): T = f
   }
-  
+
   val current = """\*\s+([\w-]+)""".r
-  
+
   def gitBranches = ("git branch --no-color" lines_! devnull mkString)
-  
-  val buildShellPrompt = { 
+
+  val buildShellPrompt = {
     (state: State) => {
-      val currBranch = 
-        current findFirstMatchIn gitBranches map (_ group(1)) getOrElse "-"
-      val currProject = Project.extract (state).currentProject.id
-      "%s:%s:%s> ".format (
+      val currBranch =
+        current findFirstMatchIn gitBranches map (_ group (1)) getOrElse "-"
+      val currProject = Project.extract(state).currentProject.id
+      "%s:%s:%s> ".format(
         currProject, currBranch, BuildSettings.version
       )
     }

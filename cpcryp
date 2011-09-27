@@ -1,1 +1,2 @@
-cp ./project/lib/* ./project/boot/scala-2.8.1/org.scala-tools.sbt/sbt/0.10.1/extra
+mkdir -p ~/.sbt/boot/scala-2.9.1/org.scala-tools.sbt/sbt/0.11.0/extra
+cp ./project/lib/* ~/.sbt/boot/scala-2.9.1/org.scala-tools.sbt/sbt/0.11.0/
