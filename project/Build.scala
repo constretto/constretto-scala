@@ -1,10 +1,8 @@
 import sbt._
 import Keys._
-import com.rossabaker.sbt.signer.SignerPlugin
-import SignerPlugin.Keys._
 
 object BuildSettings {
-  val version = "1.0-beta-3"
+  val version = "1.0-rc-1"
 }
 
 object Settings {
@@ -30,16 +28,8 @@ object Settings {
           Some("Sonatype Nexus Snapshots" at "https://oss.sonatype.org/content/repositories/snapshots")
         else
           Some("Sonatype Nexus Repository Manager" at "https://oss.sonatype.org/service/local/staging/deploy/maven2")
-    },
-    signatureGenerator := Some(SignerPlugin.OpenPgpSignatureGenerator(
-      name = "sbt-pgp",
-      password = System.getenv("SIGNER_PASSWORD"))
-    ),
-    bouncyCastleLibraries in Global := Seq(
-      file("./project/lib/bcpg-jdk16-146.jar"),
-      file("./project/lib/bcprov-jdk16-146.jar")
-    )
-  ) ++ SignerPlugin.signerSettings
+    }
+  )
 }
 
 object ShellPrompt {
@@ -69,7 +59,7 @@ object ShellPrompt {
 }
 
 object Dependencies {
-  val constrettoVersion = "2.0-beta-6"
+  val constrettoVersion = "2.0-rc-1"
 
   val constretto = "org.constretto" % "constretto-core" % constrettoVersion
   val deps = Seq(constretto)
