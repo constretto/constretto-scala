@@ -21,6 +21,9 @@ object Settings {
     scalaVersion := "2.9.1",
     crossScalaVersions := Seq("2.9.0", "2.9.1"),
     credentialsSetting,
+    publishMavenStyle := true,
+    publishArtifact in Test := false,
+    pomIncludeRepository := { x => false },
     shellPrompt := ShellPrompt.buildShellPrompt,
     publishTo <<= (version) {
       version: String =>
@@ -78,12 +81,6 @@ object ConstrettoBuild extends Build {
       description := "Constretto Scala API",
       pomExtra <<= (pomExtra, name, description) {
         (extra, name, desc) => extra ++ Seq(
-          <name>
-            {name}
-          </name>,
-          <description>
-            {desc}
-          </description>,
           <url>http://constretto.org</url>,
           <licenses>
             <license>
