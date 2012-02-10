@@ -2,7 +2,7 @@ import sbt._
 import Keys._
 
 object BuildSettings {
-  val version = "1.0-rc-2"
+  val version = "1.0"
 }
 
 object Settings {
@@ -62,7 +62,7 @@ object ShellPrompt {
 }
 
 object Dependencies {
-  val constrettoVersion = "2.0-rc-2"
+  val constrettoVersion = "2.0"
 
   val constretto = "org.constretto" % "constretto-core" % constrettoVersion
   val deps = Seq(constretto)
