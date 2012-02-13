@@ -16,7 +16,7 @@
 package org.constretto
 
 import exception.ConstrettoExpressionException
-import internal.store.{IniFileConfigurationStore, PropertiesStore}
+import internal.store.{JsonStore, IniFileConfigurationStore, PropertiesStore}
 import model.Resource
 
 /**
@@ -33,11 +33,16 @@ object Constretto {
     Constretto.configuration(withTags.getConfiguration)
   }
 
-  def properties(props: String*): ConfigurationStore = props.map(new Resource(_)).foldLeft(new PropertiesStore)(_.addResource(_))
+  def properties(props: String*): ConfigurationStore = props.map(Resource.create(_)).foldLeft(new PropertiesStore)(_.addResource(_))
 
-  def inis(i: String*): ConfigurationStore = i.map(new Resource(_)).foldLeft(new IniFileConfigurationStore)(_.addResource(_))
+  def json(path: String, key: String, tag: Option[String] = None): ConfigurationStore = {
+    tag.map(t=>new JsonStore().addResource(Resource.create(path),key,t)).getOrElse(new JsonStore().addResource(Resource.create(path), key))
 
-  def encryptedProperties(props: String*): ConfigurationStore = props.map(new Resource(_)).foldLeft(new PropertiesStore)(_.addResource(_))
+  }
+
+  def inis(i: String*): ConfigurationStore = i.map(Resource.create(_)).foldLeft(new IniFileConfigurationStore)(_.addResource(_))
+
+  def encryptedProperties(props: String*): ConfigurationStore = props.map(Resource.create(_)).foldLeft(new PropertiesStore)(_.addResource(_))
 
 }
 

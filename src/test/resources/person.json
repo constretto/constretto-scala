@@ -1,0 +1,8 @@
+{
+    "name":"Kaare",
+    "age":29,
+    "address":{
+        "postalCode":"0767",
+        "streetName":"Landingsvn"
+    }
+}

@@ -22,7 +22,7 @@ import org.constretto._, Constretto._
  * @author <a href="mailto:kaare.nilsen@gmail.com">Kaare Nilsen</a>
  */
 object Demo extends App {
-  val constretto = Constretto(List(properties("classpath:test.properties")))
+  val constretto = Constretto(properties("classpath:test.properties") :: json("classpath:person.json","person") :: Nil)
 
   val existsString = constretto[String]("string")
   val existsInt: Option[Int] = constretto.get[Int]("int")
@@ -59,4 +59,7 @@ object Demo extends App {
 
   val services = constretto[List[Service]]("myServices")
   println(services)
+
+  val person = constretto[Person]("person")
+  println(person)
 }
