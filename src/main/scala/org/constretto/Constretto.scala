@@ -18,6 +18,7 @@ package org.constretto
 import exception.ConstrettoExpressionException
 import internal.store.{JsonStore, IniFileConfigurationStore, PropertiesStore}
 import model.Resource
+import scala.collection.JavaConverters._
 
 /**
  * @author jteigen
@@ -56,6 +57,8 @@ trait Constretto {
       case _: ConstrettoExpressionException => None
     }
   }
+
+  def properties:Iterator[(String,String)] = config.iterator().asScala.map(p=>(p.getKey,p.getValue))
 
   def apply[T](name: String)(implicit converter: Converter[T]): T =
     converter.convert(CValueParser.parse(config.evaluate(name)))

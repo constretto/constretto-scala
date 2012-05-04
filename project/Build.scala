@@ -2,7 +2,7 @@ import sbt._
 import Keys._
 
 object BuildSettings {
-  val version = "1.0"
+  val version = "1.1-SNAPSHOT"
 }
 
 object Settings {
