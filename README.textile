@@ -6,7 +6,7 @@ By using this API you will be able to get a API that feels natural for Scala dev
 
 h2. How to Install?
 
-Constretto is cross compiled for Scala versions 2.9.0 and 2.9.1 and deployed to the maven central repository.
+Constretto is cross compiled for Scala versions 2.9.0, 2.9.0-1, 2.9.1, 2.9.2, 2.9.3 and 2.10 and deployed to the maven central repository.
 
 If you are using Maven, you can simply add constretto-scala as dependencies in your pom:
 
@@ -15,7 +15,7 @@ If you are using Maven, you can simply add constretto-scala as dependencies in y
 		...
 		<dependency>
 			<groupId>org.constretto</groupId>
-			<artifactId>constretto-scala_2.9.1</artifactId>
+			<artifactId>constretto-scala_${scalaVersion}</artifactId>
 			<version>1.0</version>
 		</dependency>
 		...
