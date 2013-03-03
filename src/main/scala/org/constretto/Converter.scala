@@ -63,6 +63,7 @@ object Converter {
   implicit val shortConverter = fromConstretto[java.lang.Short, Short](new ShortValueConverter, _.shortValue)
   implicit val stringConverter = fromConstretto[String, String](new StringValueConverter)
   implicit val urlConverter = fromConstretto[java.net.URL, java.net.URL](new UrlValueConverter)
+  implicit val uriConverter = fromConstretto[java.net.URI, java.net.URI](new UriValueConverter)
 }
 
 trait Converter[T] {
