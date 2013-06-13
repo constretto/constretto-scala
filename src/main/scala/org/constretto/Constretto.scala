@@ -16,7 +16,7 @@
 package org.constretto
 
 import exception.ConstrettoExpressionException
-import internal.store.{JsonStore, IniFileConfigurationStore, PropertiesStore}
+import org.constretto.internal.store.{EncryptedPropertiesStore, IniFileConfigurationStore, JsonStore, PropertiesStore}
 import model.Resource
 import scala.collection.JavaConverters._
 
@@ -44,8 +44,8 @@ object Constretto {
 
   def inis(i: String*): ConfigurationStore = i.map(Resource.create(_)).foldLeft(new IniFileConfigurationStore)(_.addResource(_))
 
-  def encryptedProperties(props: String*): ConfigurationStore = props.map(Resource.create(_)).foldLeft(new PropertiesStore)(_.addResource(_))
-
+  def encryptedProperties(passwordProperty: String, props: String*): ConfigurationStore =
+    props.map(Resource.create(_)).foldLeft(new EncryptedPropertiesStore(passwordProperty): PropertiesStore)(_.addResource(_))
 }
 
 trait Constretto {
