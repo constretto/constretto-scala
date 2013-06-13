@@ -60,7 +60,8 @@ trait Constretto {
    */
   def get[T](name: String)(implicit converter: Converter[T]): Option[T] = {
     try {
-      Some(converter.convert(CValueParser.parse(config.evaluate(name))))
+      val parsedOpt = Option(CValueParser.parse(config.evaluate(name)))
+      parsedOpt.flatMap(p => Option(converter.convert(p)))
     } catch {
       case _: ConstrettoExpressionException => None
     }
