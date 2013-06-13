@@ -16,7 +16,7 @@ If you are using Maven, you can simply add constretto-scala as dependencies in y
 		<dependency>
 			<groupId>org.constretto</groupId>
 			<artifactId>constretto-scala_${scalaVersion}</artifactId>
-			<version>1.0</version>
+			<version>1.1</version>
 		</dependency>
 		...
 	</dependencies>
@@ -25,7 +25,7 @@ If you are using Maven, you can simply add constretto-scala as dependencies in y
 If you are using SBT:
 
 <pre>
-	val constretto = "org.constretto" %% "constretto-scala" % "1.0"
+	val constretto = "org.constretto" %% "constretto-scala" % "1.1"
 </pre>
 
 
