@@ -71,7 +71,7 @@ You can easily define your own Scala Converter instances
 
 h2. How to report errors or request features?
 
-Please use the JIRA issue tracker at "http://constretto.org":http://constretto.jira.com/browse/CS
+Please use the GitHub issue tracker https://github.com/constretto/constretto-scala/issues
 
 h2. For further information and documentation
 
