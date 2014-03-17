@@ -1,6 +1,7 @@
 h1. Constretto Scala API
 
-Constretto Scala API is a native Scala wrapper API over the "Constretto":https://github.com/constretto/constretto-core/ configuration management framework for Java applications. 
+!https://travis-ci.org/constretto/constretto-scala.png!:https://travis-ci.org/constretto/constretto-scala
+Constretto Scala API is a native Scala wrapper API over the "Constretto":https://github.com/constretto/constretto-core/ configuration management framework for Java applications.
 By using this API you will be able to get a API that feels natural for Scala developers without loosing any of the features of Constretto.
 
 
@@ -71,7 +72,7 @@ You can easily define your own Scala Converter instances
 
 h2. How to report errors or request features?
 
-Please use the JIRA issue tracker at "http://constretto.org":http://constretto.jira.com/browse/CS
+Please use the GitHub issue tracker https://github.com/constretto/constretto-scala/issues
 
 h2. For further information and documentation
 
