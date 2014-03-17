@@ -19,7 +19,7 @@ object Settings {
     organization := "org.constretto",
     version := BuildSettings.version,
     scalaVersion := "2.10.2",
-    crossScalaVersions := Seq("2.9.0", "2.9.0-1", "2.9.1", "2.9.2", "2.9.3", "2.10.0", "2.10.1", "2.10.2"),
+    crossScalaVersions := Seq("2.9.0", "2.9.0-1", "2.9.1", "2.9.2", "2.9.3", "2.10.0", "2.10.1", "2.10.2", "2.10.3"),
     credentialsSetting,
     publishMavenStyle := true,
     publishArtifact in Test := false,
@@ -62,7 +62,7 @@ object ShellPrompt {
 }
 
 object Dependencies {
-  val constrettoVersion = "2.0.4"
+  val constrettoVersion = "2.1.4"
 
   val constretto = "org.constretto" % "constretto-core" % constrettoVersion
   val deps = Seq(constretto)
