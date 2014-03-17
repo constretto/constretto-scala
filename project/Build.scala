@@ -18,7 +18,7 @@ object Settings {
   lazy val buildSettings = Defaults.defaultSettings ++ Seq(
     organization := "org.constretto",
     version := BuildSettings.version,
-    scalaVersion := "2.10.2",
+    scalaVersion := "2.10.3",
     crossScalaVersions := Seq("2.9.0", "2.9.0-1", "2.9.1", "2.9.2", "2.9.3", "2.10.0", "2.10.1", "2.10.2", "2.10.3"),
     credentialsSetting,
     publishMavenStyle := true,
