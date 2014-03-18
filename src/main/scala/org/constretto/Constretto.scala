@@ -95,6 +95,7 @@ trait Constretto {
    * @throws ConstrettoConversionException If a conversion error occurs when reconfiguring objects.
    * @since 1.1
    */
+  @deprecated("Will be removed once Constretto 3 is released")
   def prependTag(tags: String*) {
     config.prependTag(tags: _*)
   }
@@ -107,6 +108,7 @@ trait Constretto {
    * @throws ConstrettoConversionException If a conversion error occurs when reconfiguring objects.
    * @since 1.1
    */
+  @deprecated("Will be removed once Constretto 3 is released")
   def appendTag(tags: String*) {
     config.appendTag(tags: _*)
   }
@@ -119,6 +121,7 @@ trait Constretto {
    * @throws ConstrettoConversionException If a conversion error occurs when reconfiguring objects.
    * @since 1.1
    */
+  @deprecated("Will be removed once Constretto 3 is released")
   def removeTag(tags: String*) {
     config.removeTag(tags: _*)
   }
@@ -134,6 +137,7 @@ trait Constretto {
    * @throws ConstrettoConversionException If a conversion error occurs when reconfiguring objects.
    * @since 1.1
    */
+  @deprecated("Will be removed once Constretto 3 is released")
   def resetTags(reconfigure: Boolean = false) {
     config.resetTags(reconfigure)
   }
@@ -152,6 +156,7 @@ trait Constretto {
    * @throws ConstrettoConversionException If a conversion error occurs when reconfiguring objects.
    * @since 1.1
    */
+  @deprecated("Will be removed once Constretto 3 is released")
   def clearTags(reconfigure: Boolean = false) {
     config.clearTags(reconfigure)
   }
