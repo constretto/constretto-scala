@@ -65,7 +65,7 @@ object Dependencies {
   val constrettoVersion = "2.1.4"
 
   val constretto = "org.constretto" % "constretto-core" % constrettoVersion
-  val deps = Seq(constretto)
+  val deps = Seq(constretto, "org.scalatest" %% "scalatest" % "2.1.0" % "test")
 }
 
 object ConstrettoBuild extends Build {
