@@ -1,7 +1,7 @@
 h1. Constretto Scala API
 
-!https://travis-ci.org/constretto/constretto-scala.png!:https://travis-ci.org/constretto/constretto-scala
-Constretto Scala API is a native Scala wrapper API over the "Constretto":https://github.com/constretto/constretto-core/ configuration management framework for Java applications. 
+!https://travis-ci.org/constretto/constretto-scala.png?branch=1.1!:https://travis-ci.org/constretto/constretto-scala
+Constretto Scala API is a native Scala wrapper API over the "Constretto":https://github.com/constretto/constretto-core/ configuration management framework for Java applications.
 By using this API you will be able to get a API that feels natural for Scala developers without loosing any of the features of Constretto.
 
 
@@ -17,7 +17,7 @@ If you are using Maven, you can simply add constretto-scala as dependencies in y
 		<dependency>
 			<groupId>org.constretto</groupId>
 			<artifactId>constretto-scala_${scalaVersion}</artifactId>
-			<version>1.0</version>
+			<version>1.1</version>
 		</dependency>
 		...
 	</dependencies>
@@ -26,7 +26,7 @@ If you are using Maven, you can simply add constretto-scala as dependencies in y
 If you are using SBT:
 
 <pre>
-	val constretto = "org.constretto" %% "constretto-scala" % "1.0"
+	val constretto = "org.constretto" %% "constretto-scala" % "1.1"
 </pre>
 
 

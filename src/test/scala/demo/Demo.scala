@@ -62,4 +62,7 @@ object Demo extends App {
 
   val person = constretto[Person]("person")
   println(person)
+
+  println("All properties")
+  constretto.properties.foreach(p=> println("key =  " + p._1 + ", value = " + p._2))
 }

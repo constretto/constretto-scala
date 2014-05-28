@@ -1,8 +1,9 @@
 import sbt._
-import Keys._
+import sbt.Keys._
+import scala.Some
 
 object BuildSettings {
-  val version = "1.0"
+  val version = "1.1"
 }
 
 object Settings {
@@ -18,8 +19,8 @@ object Settings {
   lazy val buildSettings = Defaults.defaultSettings ++ Seq(
     organization := "org.constretto",
     version := BuildSettings.version,
-    scalaVersion := "2.10.0",
-    crossScalaVersions := Seq("2.9.0", "2.9.0-1", "2.9.1", "2.9.2", "2.9.3", "2.10.0", "2.11.1"),
+    scalaVersion := "2.10.3",
+    crossScalaVersions := Seq("2.9.0", "2.9.0-1", "2.9.1", "2.9.2", "2.9.3", "2.10.0", "2.10.1", "2.10.2", "2.10.3", "2.11.1"),
     credentialsSetting,
     publishMavenStyle := true,
     publishArtifact in Test := false,
@@ -62,9 +63,18 @@ object ShellPrompt {
 }
 
 object Dependencies {
-  val constrettoVersion = "2.0"
+  val constrettoVersion = "2.1.4"
 
   val constretto = "org.constretto" % "constretto-core" % constrettoVersion
+
+  val scalatestVersions = Map("2.9" -> "1.9.2", "2.10" -> "2.1.0")
+
+  def majorVersion(scalaVersion: String) = {
+    """\d+\.\d+""".r findFirstIn scalaVersion getOrElse sys.error(s"Unknown scala version $scalaVersion")
+  }
+
+  def scalatestDependency(scalaVersion: String) = "org.scalatest" %% "scalatest" % scalatestVersions.getOrElse(majorVersion(scalaVersion), sys.error(s"Unknown scala version $scalaVersion")) % "test"
+
   val deps = Seq(constretto)
 }
 
@@ -113,8 +123,11 @@ object ConstrettoBuild extends Build {
           </developers>
         )
       },
+      libraryDependencies <+= scalaVersion(Dependencies.scalatestDependency(_)),
+
       libraryDependencies ++= Dependencies.deps
-    )
+
+   )
   )
 }
 
