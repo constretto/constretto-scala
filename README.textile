@@ -1,13 +1,13 @@
 h1. Constretto Scala API
 
-!https://travis-ci.org/constretto/constretto-scala.png?branch=1.1!:https://travis-ci.org/constretto/constretto-scala
+!https://travis-ci.org/constretto/constretto-scala.png?branch=master!:https://travis-ci.org/constretto/constretto-scala
 Constretto Scala API is a native Scala wrapper API over the "Constretto":https://github.com/constretto/constretto-core/ configuration management framework for Java applications.
 By using this API you will be able to get a API that feels natural for Scala developers without loosing any of the features of Constretto.
 
 
 h2. How to Install?
 
-Constretto is cross compiled for Scala versions 2.9.0, 2.9.0-1, 2.9.1, 2.9.2, 2.9.3 and 2.10 and deployed to the maven central repository.
+Constretto is cross compiled for Scala versions 2.9, 2.10 and 2.11 and deployed to the maven central repository.
 
 If you are using Maven, you can simply add constretto-scala as dependencies in your pom:
 

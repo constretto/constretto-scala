@@ -9,42 +9,43 @@ import demo.{Address, Person}
  *
  * @author zapodot at gmail dot com
  */
-class ConstrettoTest extends FlatSpec with Matchers {
+class ConstrettoTest extends FunSuite{
 
-  "An empty Constretto configuration " should "have only system properties and environment variables" in {
+  test("An empty Constretto configuration should have only system properties and environment variables") {
     val constretto = Constretto(Nil)
 
-    constretto.properties.length should be (System.getProperties.size() + System.getenv().size())
+    assert(constretto.properties.length === (System.getProperties.size() + System.getenv().size()))
   }
 
-  "A Constretto configuration initialized with a property file" should "contain all system properties, environment variables and all properties set in the file" in {
+  test("A Constretto configuration initialized with a property file should contain all system properties, environment variables and all properties set in the file") {
 
     val constretto = Constretto(properties("classpath:test.properties") :: Nil, "test")
 
-    constretto[String]("baseUrl") should be ("http://test")
-    constretto[Double]("double") should be (5.5d)
+    assert(constretto[String]("baseUrl") === "http://test")
+    assert(constretto[Double]("double") === 5.5d)
 
     // Using get returns an Option
-    constretto.get[Double]("double") should be (Some(5.5d))
+    assert(constretto.get[Double]("double") === Some(5.5d))
 
     val mapProperty = constretto[Map[Int, Float]]("myMap")
-    mapProperty.keySet should be (Set(1,2,3))
-    mapProperty.values should contain theSameElementsAs Seq(2f, 3f, 4f)
-    constretto.properties.length should be (System.getProperties.size() + System.getenv().size() + 13)
+    assert(mapProperty.keySet === Set(1,2,3))
+    assert(mapProperty.values.toList.sorted === List(2f, 3f, 4f))
+    assert(constretto.properties.length === (System.getProperties.size() + System.getenv().size() + 13))
 
   }
 
-  it should "throw an ConstrettoExpressionException if a unknown property is provided to Constretto.apply " in {
+  test("it should throw an ConstrettoExpressionException if a unknown property is provided to Constretto.apply ") {
     val constretto = Constretto(Nil)
-    a [ConstrettoExpressionException] should be thrownBy {
+    intercept[ConstrettoExpressionException] {
       constretto[String]("unknownProperty")
     }
-    constretto.get[String]("unknownProperty") should be (None)
+    
+    assert(constretto.get[String]("unknownProperty") === None)
   }
 
-  "In a Constretto configuration initialized with the json file 'person.json it " should "be possible to extract a Person object using the implicit converter" in {
+  test("In a Constretto configuration initialized with the json file person.json it should be possible to extract a Person object using the implicit converter") {
     val constretto = Constretto(json("classpath:person.json", "person") :: Nil)
-    constretto[Person]("person") should be (Person("Kaare", 29, None, Address("0767", "Landingsvn")))
+    assert(constretto[Person]("person") === Person("Kaare", 29, None, Address("0767", "Landingsvn")))
   }
 
 }

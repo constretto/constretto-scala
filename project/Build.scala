@@ -20,7 +20,7 @@ object Settings {
     organization := "org.constretto",
     version := BuildSettings.version,
     scalaVersion := "2.10.3",
-    crossScalaVersions := Seq("2.9.0", "2.9.0-1", "2.9.1", "2.9.2", "2.9.3", "2.10.0", "2.10.1", "2.10.2", "2.10.3", "2.11.1"),
+    crossScalaVersions := Seq("2.9.0", "2.9.0-1", "2.9.1", "2.9.2", "2.9.3", "2.10.0", "2.10.1", "2.10.2", "2.10.3", "2.11.0", "2.11.1"),
     credentialsSetting,
     publishMavenStyle := true,
     publishArtifact in Test := false,
@@ -67,7 +67,7 @@ object Dependencies {
 
   val constretto = "org.constretto" % "constretto-core" % constrettoVersion
 
-  val scalatestVersions = Map("2.9" -> "1.9.2", "2.10" -> "2.1.0")
+  val scalatestVersions = Map("2.9" -> "1.9.2", "2.10" -> "2.1.7", "2.11" -> "2.1.7")
 
   def majorVersion(scalaVersion: String) = {
     """\d+\.\d+""".r findFirstIn scalaVersion getOrElse sys.error(s"Unknown scala version $scalaVersion")
