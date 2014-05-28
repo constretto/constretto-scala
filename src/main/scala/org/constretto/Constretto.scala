@@ -47,7 +47,7 @@ object Constretto {
 }
 
 trait Constretto {
-  protected def config: ConstrettoConfiguration
+  def config: ConstrettoConfiguration
 
   def get[T](name: String)(implicit converter: Converter[T]): Option[T] = {
     try {
