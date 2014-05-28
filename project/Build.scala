@@ -19,7 +19,7 @@ object Settings {
     organization := "org.constretto",
     version := BuildSettings.version,
     scalaVersion := "2.10.0",
-    crossScalaVersions := Seq("2.9.0", "2.9.0-1", "2.9.1", "2.9.2", "2.9.3", "2.10.0"),
+    crossScalaVersions := Seq("2.9.0", "2.9.0-1", "2.9.1", "2.9.2", "2.9.3", "2.10.0", "2.11.1"),
     credentialsSetting,
     publishMavenStyle := true,
     publishArtifact in Test := false,
