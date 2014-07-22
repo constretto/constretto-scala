@@ -105,8 +105,8 @@ object ConstrettoBuild extends Build {
             <url>http://github.com/constretto/constretto-scala</url>
           </scm>,
           <issueManagement>
-            <system>jira</system>
-            <url>http://constretto.jira.com/browse/CS</url>
+            <system>github</system>
+            <url>https://github.com/constretto/constretto-scala/issues</url>
           </issueManagement>,
           <developers>
             <developer>
