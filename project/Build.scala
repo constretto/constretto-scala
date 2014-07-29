@@ -3,7 +3,7 @@ import sbt.Keys._
 import scala.Some
 
 object BuildSettings {
-  val version = "1.1"
+  val version = "1.2-SNAPSHOT"
 }
 
 object Settings {
