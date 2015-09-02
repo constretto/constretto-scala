@@ -19,8 +19,8 @@ object Settings {
   lazy val buildSettings = Defaults.defaultSettings ++ Seq(
     organization := "org.constretto",
     version := BuildSettings.version,
-    scalaVersion := "2.10.3",
-    crossScalaVersions := Seq("2.9.0", "2.9.0-1", "2.9.1", "2.9.2", "2.9.3", "2.10.4", "2.11.1"),
+    scalaVersion := "2.11.7",
+    crossScalaVersions := Seq("2.10.5", "2.11.7"),
     credentialsSetting,
     publishMavenStyle := true,
     publishArtifact in Test := false,
@@ -63,7 +63,7 @@ object ShellPrompt {
 }
 
 object Dependencies {
-  val constrettoVersion = "2.1.4"
+  val constrettoVersion = "2.2.2"
 
   val constretto = "org.constretto" % "constretto-core" % constrettoVersion
 
