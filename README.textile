@@ -2,7 +2,7 @@ h1. Constretto Scala API
 
 !https://travis-ci.org/constretto/constretto-scala.png?branch=master!:https://travis-ci.org/constretto/constretto-scala
 Constretto Scala API is a native Scala wrapper API over the "Constretto":https://github.com/constretto/constretto-core/ configuration management framework for Java applications.
-By using this API you will be able to get a API that feels natural for Scala developers without loosing any of the features of Constretto.
+By using this API you will be able to get a API that feels natural for Scala developers without losing any of the features of Constretto.
 
 
 h2. How to Install?
