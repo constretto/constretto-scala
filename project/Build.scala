@@ -19,8 +19,8 @@ object Settings {
   lazy val buildSettings = Defaults.defaultSettings ++ Seq(
     organization := "org.constretto",
     version := BuildSettings.version,
-    scalaVersion := "2.11.7",
-    crossScalaVersions := Seq("2.10.5", "2.11.7"),
+    crossScalaVersions := Seq("2.12.0", "2.11.7", "2.10.5"),
+    scalaVersion := crossScalaVersions.value.head,
     credentialsSetting,
     publishMavenStyle := true,
     publishArtifact in Test := false,
@@ -63,17 +63,15 @@ object ShellPrompt {
 }
 
 object Dependencies {
-  val constrettoVersion = "2.2.2"
+  val constrettoVersion = "2.2.3"
 
   val constretto = "org.constretto" % "constretto-core" % constrettoVersion
-
-  val scalatestVersions = Map("2.9" -> "1.9.2", "2.10" -> "2.1.7", "2.11" -> "2.1.7")
 
   def majorVersion(scalaVersion: String) = {
     """\d+\.\d+""".r findFirstIn scalaVersion getOrElse sys.error(s"Unknown scala version $scalaVersion")
   }
 
-  def scalatestDependency(scalaVersion: String) = "org.scalatest" %% "scalatest" % scalatestVersions.getOrElse(majorVersion(scalaVersion), sys.error(s"Unknown scala version $scalaVersion")) % "test"
+  val scalatest = "org.scalatest" %% "scalatest" % "3.0.0" % "test"
 
   val deps = Seq(constretto)
 }
@@ -123,11 +121,8 @@ object ConstrettoBuild extends Build {
           </developers>
         )
       },
-      libraryDependencies <+= scalaVersion(Dependencies.scalatestDependency(_)),
-
+      libraryDependencies += Dependencies.scalatest,
       libraryDependencies ++= Dependencies.deps
-
    )
   )
 }
-
