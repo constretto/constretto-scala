@@ -19,7 +19,7 @@ object Settings {
   lazy val buildSettings = Defaults.defaultSettings ++ Seq(
     organization := "org.constretto",
     version := BuildSettings.version,
-    crossScalaVersions := Seq("2.12.1", "2.12.0", "2.11.7", "2.10.5"),
+    crossScalaVersions := Seq("2.13.0", "2.12.1", "2.12.0", "2.11.7", "2.10.5"),
     scalaVersion := crossScalaVersions.value.head,
     credentialsSetting,
     publishMavenStyle := true,
@@ -43,7 +43,7 @@ object Dependencies {
     """\d+\.\d+""".r findFirstIn scalaVersion getOrElse sys.error(s"Unknown scala version $scalaVersion")
   }
 
-  val scalatest = "org.scalatest" %% "scalatest" % "3.0.0" % "test"
+  val scalatest = "org.scalatest" %% "scalatest" % "3.0.8" % "test"
 
   val deps = Seq(constretto)
 }
