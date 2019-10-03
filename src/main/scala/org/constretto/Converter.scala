@@ -18,9 +18,9 @@ package org.constretto
 import org.constretto.internal.converter._
 
 /**
- * @author jteigen
- * @author <a href="mailto:kaare.nilsen@gmail.com">Kaare Nilsen</a>
- */
+  * @author jteigen
+  * @author <a href="mailto:kaare.nilsen@gmail.com">Kaare Nilsen</a>
+  */
 object Converter {
 
   def apply[T](f: Json => T): Converter[T] = new Converter[T] {
@@ -52,18 +52,18 @@ object Converter {
   }
 
   implicit val booleanConverter = fromConstretto[java.lang.Boolean, Boolean](new BooleanValueConverter, _.booleanValue)
-  implicit val byteConverter = fromConstretto[java.lang.Byte, Byte](new ByteValueConverter, _.byteValue)
-  implicit val doubleConverter = fromConstretto[java.lang.Double, Double](new DoubleValueConverter, _.doubleValue)
-  implicit val fileConverter = fromConstretto[java.io.File, java.io.File](new FileValueConverter)
-  implicit val floatConverter = fromConstretto[java.lang.Float, Float](new FloatValueConverter, _.floatValue)
-  implicit val inetConverter = fromConstretto[java.net.InetAddress, java.net.InetAddress](new InetAddressValueConverter)
-  implicit val intConverter = fromConstretto[java.lang.Integer, Int](new IntegerValueConverter, _.intValue)
-  implicit val localeConverter = fromConstretto[java.util.Locale, java.util.Locale](new LocaleValueConverter)
-  implicit val longConverter = fromConstretto[java.lang.Long, Long](new LongValueConverter, _.longValue)
-  implicit val shortConverter = fromConstretto[java.lang.Short, Short](new ShortValueConverter, _.shortValue)
-  implicit val stringConverter = fromConstretto[String, String](new StringValueConverter)
-  implicit val urlConverter = fromConstretto[java.net.URL, java.net.URL](new UrlValueConverter)
-  implicit val uriConverter = fromConstretto[java.net.URI, java.net.URI](new UriValueConverter)
+  implicit val byteConverter    = fromConstretto[java.lang.Byte, Byte](new ByteValueConverter, _.byteValue)
+  implicit val doubleConverter  = fromConstretto[java.lang.Double, Double](new DoubleValueConverter, _.doubleValue)
+  implicit val fileConverter    = fromConstretto[java.io.File, java.io.File](new FileValueConverter)
+  implicit val floatConverter   = fromConstretto[java.lang.Float, Float](new FloatValueConverter, _.floatValue)
+  implicit val inetConverter    = fromConstretto[java.net.InetAddress, java.net.InetAddress](new InetAddressValueConverter)
+  implicit val intConverter     = fromConstretto[java.lang.Integer, Int](new IntegerValueConverter, _.intValue)
+  implicit val localeConverter  = fromConstretto[java.util.Locale, java.util.Locale](new LocaleValueConverter)
+  implicit val longConverter    = fromConstretto[java.lang.Long, Long](new LongValueConverter, _.longValue)
+  implicit val shortConverter   = fromConstretto[java.lang.Short, Short](new ShortValueConverter, _.shortValue)
+  implicit val stringConverter  = fromConstretto[String, String](new StringValueConverter)
+  implicit val urlConverter     = fromConstretto[java.net.URL, java.net.URL](new UrlValueConverter)
+  implicit val uriConverter     = fromConstretto[java.net.URI, java.net.URI](new UriValueConverter)
 }
 
 trait Converter[T] {
