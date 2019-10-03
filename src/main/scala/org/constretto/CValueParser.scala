@@ -15,12 +15,12 @@
  */
 package org.constretto
 
-import model.{CPrimitive, CObject, CArray, CValue}
+import model.{CArray, CObject, CPrimitive, CValue}
 
 /**
- * @author jteigen
- * @author <a href="mailto:kaare.nilsen@gmail.com">Kaare Nilsen</a>
- */
+  * @author jteigen
+  * @author <a href="mailto:kaare.nilsen@gmail.com">Kaare Nilsen</a>
+  */
 object CValueParser {
 
   import collection.JavaConverters._
@@ -28,12 +28,17 @@ object CValueParser {
   def handleArray(cArray: CArray): JArray = JArray(cArray.data().asScala.map(handle).toList)
 
   def handleObject(cObject: CObject): JObject = {
-    JObject(cObject.data().asScala.map {
-      e =>
-        val key = e._1
-        val value = e._2
-        key -> handle(value)
-    }.toMap)
+    JObject(
+      cObject
+        .data()
+        .asScala
+        .map { e =>
+          val key   = e._1
+          val value = e._2
+          key -> handle(value)
+        }
+        .toMap
+    )
   }
 
   def handle(cValue: CValue): Json = {
@@ -41,7 +46,6 @@ object CValueParser {
     else if (cValue.isArray) handleArray(cValue.asInstanceOf[CArray])
     else handleObject(cValue.asInstanceOf[CObject])
   }
-
 
   def parse(v: CValue): Json = handle(v)
 }
