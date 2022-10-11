@@ -17,6 +17,10 @@ package org.constretto
 
 import org.constretto.internal.converter._
 
+import java.io.File
+import java.net.{InetAddress, URI, URL}
+import java.util.Locale
+
 /**
   * @author jteigen
   * @author <a href="mailto:kaare.nilsen@gmail.com">Kaare Nilsen</a>
@@ -43,27 +47,28 @@ object Converter {
 
   def fromConstretto[A, B](v: ValueConverter[A], f: A => B = identity[A] _) = fromString(p => f(v.fromString(p)))
 
-  implicit def listConverter[T](implicit cv: Converter[T]) = fromList(cv.convert)
+  implicit def listConverter[T](implicit cv: Converter[T]): Converter[List[T]] = fromList(cv.convert)
 
-  implicit def mapConverter[K, V](implicit keyConv: Converter[K], valueConv: Converter[V]) = fromObject {
+  implicit def mapConverter[K, V](implicit keyConv: Converter[K], valueConv: Converter[V]): Converter[Map[K, V]] = fromObject {
     _.data.map {
       case (k, v) => (keyConv.convert(JPrimitive(k)), valueConv.convert(v))
     }
   }
 
-  implicit val booleanConverter = fromConstretto[java.lang.Boolean, Boolean](new BooleanValueConverter, _.booleanValue)
-  implicit val byteConverter    = fromConstretto[java.lang.Byte, Byte](new ByteValueConverter, _.byteValue)
-  implicit val doubleConverter  = fromConstretto[java.lang.Double, Double](new DoubleValueConverter, _.doubleValue)
-  implicit val fileConverter    = fromConstretto[java.io.File, java.io.File](new FileValueConverter)
-  implicit val floatConverter   = fromConstretto[java.lang.Float, Float](new FloatValueConverter, _.floatValue)
-  implicit val inetConverter    = fromConstretto[java.net.InetAddress, java.net.InetAddress](new InetAddressValueConverter)
-  implicit val intConverter     = fromConstretto[java.lang.Integer, Int](new IntegerValueConverter, _.intValue)
-  implicit val localeConverter  = fromConstretto[java.util.Locale, java.util.Locale](new LocaleValueConverter)
-  implicit val longConverter    = fromConstretto[java.lang.Long, Long](new LongValueConverter, _.longValue)
-  implicit val shortConverter   = fromConstretto[java.lang.Short, Short](new ShortValueConverter, _.shortValue)
-  implicit val stringConverter  = fromConstretto[String, String](new StringValueConverter)
-  implicit val urlConverter     = fromConstretto[java.net.URL, java.net.URL](new UrlValueConverter)
-  implicit val uriConverter     = fromConstretto[java.net.URI, java.net.URI](new UriValueConverter)
+  implicit val booleanConverter: Converter[Boolean] = fromConstretto[java.lang.Boolean, Boolean](new BooleanValueConverter, _.booleanValue)
+  implicit val byteConverter: Converter[Byte] = fromConstretto[java.lang.Byte, Byte](new ByteValueConverter, _.byteValue)
+  implicit val doubleConverter: Converter[Double] = fromConstretto[java.lang.Double, Double](new DoubleValueConverter, _.doubleValue)
+  implicit val fileConverter: Converter[File] = fromConstretto[java.io.File, java.io.File](new FileValueConverter)
+  implicit val floatConverter: Converter[Float] = fromConstretto[java.lang.Float, Float](new FloatValueConverter, _.floatValue)
+  implicit val inetConverter: Converter[InetAddress] = fromConstretto[java.net.InetAddress, java.net.InetAddress](new InetAddressValueConverter)
+  implicit val intConverter: Converter[Int] = fromConstretto[java.lang.Integer, Int](new IntegerValueConverter, _.intValue)
+  implicit val localeConverter: Converter[Locale] = fromConstretto[java.util.Locale, java.util.Locale](new LocaleValueConverter)
+  implicit val longConverter: Converter[Long] = fromConstretto[java.lang.Long, Long](new LongValueConverter, _.longValue)
+  implicit val shortConverter: Converter[Short] = fromConstretto[java.lang.Short, Short](new ShortValueConverter, _.shortValue)
+  implicit val stringConverter: Converter[String] = fromConstretto[String, String](new StringValueConverter)
+  implicit val urlConverter: Converter[URL] = fromConstretto[java.net.URL, java.net.URL](new UrlValueConverter)
+  implicit val uriConverter: Converter[URI] = fromConstretto[java.net.URI, java.net.URI](new UriValueConverter)
+
 }
 
 trait Converter[T] {

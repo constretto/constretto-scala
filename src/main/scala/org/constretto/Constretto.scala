@@ -95,9 +95,8 @@ trait Constretto {
     * @since 1.1
     */
   @deprecated("Will be removed once Constretto 3 is released")
-  def prependTag(tags: String*) {
+  def prependTag(tags: String*) =
     config.prependTag(tags: _*)
-  }
 
   /**
     * Appends (lower precedence) a new configuration tag at runtime.
@@ -108,9 +107,8 @@ trait Constretto {
     * @since 1.1
     */
   @deprecated("Will be removed once Constretto 3 is released")
-  def appendTag(tags: String*) {
+  def appendTag(tags: String*) =
     config.appendTag(tags: _*)
-  }
 
   /**
     * Removes a configuration tag at runtime.
@@ -121,9 +119,8 @@ trait Constretto {
     * @since 1.1
     */
   @deprecated("Will be removed once Constretto 3 is released")
-  def removeTag(tags: String*) {
+  def removeTag(tags: String*) =
     config.removeTag(tags: _*)
-  }
 
   /**
     * Resets all tags in Constretto to the ones originally
@@ -137,9 +134,8 @@ trait Constretto {
     * @since 1.1
     */
   @deprecated("Will be removed once Constretto 3 is released")
-  def resetTags(reconfigure: Boolean = false) {
+  def resetTags(reconfigure: Boolean = false) =
     config.resetTags(reconfigure)
-  }
 
   /**
     * Clears all tags in Constretto including the ones originally
@@ -156,9 +152,8 @@ trait Constretto {
     * @since 1.1
     */
   @deprecated("Will be removed once Constretto 3 is released")
-  def clearTags(reconfigure: Boolean = false) {
+  def clearTags(reconfigure: Boolean = false) =
     config.clearTags(reconfigure)
-  }
 
   /**
     * Gives a list over all the tags currently in use.

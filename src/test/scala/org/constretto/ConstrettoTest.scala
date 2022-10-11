@@ -4,12 +4,14 @@ import org.scalatest._
 import org.constretto.Constretto._
 import org.constretto.exception.ConstrettoExpressionException
 import demo.{Address, Person}
+import org.scalatest.funsuite.AnyFunSuite
+import org.scalatest.matchers.should.Matchers
 
 /**
  *
  * @author zapodot at gmail dot com
  */
-class ConstrettoTest extends FunSuite{
+class ConstrettoTest extends AnyFunSuite with Matchers {
 
   test("An empty Constretto configuration should have only system properties and environment variables") {
     val constretto = Constretto(Nil)
